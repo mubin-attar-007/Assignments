@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1>Personal Finance Tracker</h1>
+        </nav>
+    </header>
+    <main>
+        <section id="overview">
+            <h2>Financial Overview</h2>
+            <div class="summary-cards total-balance-cards">
+                <h3>Total Balance</h3>
+                <p id="total-balance">$0.00</p>
+            </div>
+            <div class="summary-cards total-income-cards">
+                <h3>Total Income</h3>
+                <p id="total-income">$0.00</p>
+            </div>
+            <div class="summary-cards total-expense-cards">
+                <h3>Total Expense</h3>
+                <p id="total-expense">$0.00</p>
+            </div>
+        </section>
+        <section id="transaction">
+            <form action="" method="POST" id="transaction-form">
+                <label for="title">Title: <input id="title" type="text" name="title" required></label>
+                <label for="amount">Amount: <input id="amount" type="number" name="amount" required min="0.01"
+                        max="100000" step="0.01" value="100"></label>
+                <label for="category">Category:
+                    <select id="category" name="category" required>
+                        <option value="food">Food</option>
+                        <option value="salary">Salary</option>
+                        <option value="transport">Transport</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="bills">Bills</option>
+                    </select>
+                </label>
+                <label for="date">Date: <input id="date" type="date" name="date" required></label>
+                <fieldset class="type-field">
+                    <legend>Type</legend>
+                    <label for="income"><input id="income" type="radio" name="type" value="income" required>
+                        Income</label>
+                    <label for="expense"><input id="expense" type="radio" name="type" value="expense"> Expense</label>
+                </fieldset>
+                <button type="submit">Add Transaction</button>
+            </form>
+        </section>
+        <section>
+            <h2>Transactions</h2>
+            <div class="transaction-filters">
+                <label for="search-transaction">Search
+                    <input id="search-transaction" type="search" placeholder="Type transaction title">
+                </label>
+                <label for="filter-type">Type
+                    <select id="filter-type">
+                        <option value="all">All</option>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </label>
+                <label for="filter-category">Category
+                    <select id="filter-category">
+                        <option value="all">All</option>
+                        <option value="food">Food</option>
+                        <option value="salary">Salary</option>
+                        <option value="transport">Transport</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="bills">Bills</option>
+                    </select>
+                </label>
+                <label for="filter-date">Date
+                    <input type="date" id="filter-date">
+                </label>
+                <label for="sort-transactions">Sort
+                    <select id="sort-transactions">
+                        <option value="latest">Latest</option>
+                        <option value="oldest">Oldest</option>
+                        <option value="highest">Highest Amount</option>
+                        <option value="lowest">Lowest Amount</option>
+                    </select>
+                </label>
+            </div>
+
+            <div id="transaction-list"></div>
+
+        </section>
+    </main>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

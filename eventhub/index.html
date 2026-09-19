@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventHub</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1>EventHub</h1><a href="#bookings">My Bookings</a>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h2>Find your next experience</h2>
+            <p>Browse events and reserve your seat.</p><input id="search-events" type="search"
+                placeholder="Search event, organizer, or venue">
+        </section>
+        <section id="dashboard" class="dashboard">
+            <article><strong id="total-events">0</strong><span>Total events</span></article>
+            <article><strong id="upcoming-events">0</strong><span>Upcoming events</span></article>
+            <article><strong id="total-bookings">0</strong><span>Total bookings</span></article>
+            <article><strong id="today-events">0</strong><span>Today's events</span></article>
+        </section>
+        <section class="filters">
+            <label>Category <select id="category-filter">
+                    <option value="all">All</option>
+                    <option>Tech</option>
+                    <option>Music</option>
+                    <option>Workshop</option>
+                    <option>Sports</option>
+                    <option>Education</option>
+                </select></label>
+            <label>Price <select id="price-filter">
+                    <option value="all">All</option>
+                    <option value="free">Free</option>
+                    <option value="paid">Paid</option>
+                </select></label>
+            <label>Minimum price <input id="min-price" type="number" min="0" placeholder="$0"></label>
+            <label>Maximum price <input id="max-price" type="number" min="0" placeholder="No limit"></label>
+            <label>Sort <select id="sort-events">
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="low">Lowest price</option>
+                    <option value="high">Highest price</option>
+                    <option value="az">A-Z</option>
+                </select></label>
+            <label>Date <input id="date-filter" type="date"></label>
+        </section>
+        <section>
+            <h2>Upcoming Events</h2>
+            <div id="event-list"></div>
+        </section>
+        <section id="bookings">
+            <h2>My Bookings</h2>
+            <div id="booking-list"></div>
+        </section>
+    </main>
+    <div id="event-modal" class="modal hidden">
+        <div class="modal-content"><button class="close" type="button">Close</button>
+            <div id="event-details"></div><button id="book-button" type="button">Book tickets</button>
+        </div>
+    </div>
+    <div id="booking-modal" class="modal hidden">
+        <div class="modal-content"><button class="close" type="button">Close</button>
+            <form id="booking-form"><input name="name" placeholder="Full name" required><input name="email" type="email"
+                    placeholder="Email" required><input name="phone" placeholder="Phone number" required><input
+                    name="tickets" type="number" min="1" max="10" placeholder="Number of tickets" required><button
+                    type="submit">Confirm booking</button></form>
+        </div>
+    </div>
+    <footer>
+        <p>EventHub</p>
+    </footer>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

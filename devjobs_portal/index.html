@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevJobs Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1>DevJobs Portal</h1><button id="bookmarks-button" type="button">Bookmarks</button>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h2>Find your next developer role</h2>
+            <p>Search simple, focused opportunities.</p><input id="search-jobs" type="search"
+                placeholder="Search title, company, or skill">
+        </section>
+        <section class="featured">
+            <h2>Featured jobs</h2>
+            <p>Frontend &middot; Backend &middot; Full Stack</p>
+        </section>
+        <section class="filters">
+            <label>Location <select id="location-filter">
+                    <option value="all">All</option>
+                    <option>Remote</option>
+                    <option>Hybrid</option>
+                    <option>Onsite</option>
+                </select></label>
+            <label>Experience <select id="experience-filter">
+                    <option value="all">All</option>
+                    <option>Junior</option>
+                    <option>Mid</option>
+                    <option>Senior</option>
+                </select></label>
+            <label>Job type <select id="type-filter">
+                    <option value="all">All</option>
+                    <option>Full-time</option>
+                    <option>Part-time</option>
+                    <option>Contract</option>
+                </select></label>
+            <label>Category <select id="category-filter">
+                    <option value="all">All</option>
+                    <option>Frontend</option>
+                    <option>Backend</option>
+                    <option>Full Stack</option>
+                </select></label>
+            <label>Salary <select id="salary-filter">
+                    <option value="all">All</option>
+                    <option value="low">Under $80,000</option>
+                    <option value="high">$80,000 and above</option>
+                </select></label>
+            <label>Sort <select id="sort-jobs">
+                    <option value="newest">Newest</option>
+                    <option value="high">Highest salary</option>
+                    <option value="low">Lowest salary</option>
+                    <option value="az">Alphabetical</option>
+                </select></label>
+        </section>
+        <section>
+            <h2>Latest Jobs</h2>
+            <div id="job-list"></div>
+            <div id="pagination"></div>
+        </section>
+    </main>
+    <div id="job-modal" class="modal hidden">
+        <div class="modal-content"><button class="close" type="button">Close</button>
+            <div id="job-details"></div><button id="apply-button" type="button">Apply</button>
+        </div>
+    </div>
+    <div id="application-modal" class="modal hidden">
+        <div class="modal-content"><button class="close" type="button">Close</button>
+            <form id="application-form">
+                <div class="step" data-step="1">
+                    <h2>Personal information</h2><input name="name" placeholder="Name" required><input name="email"
+                        type="email" placeholder="Email" required><input name="phone" placeholder="Phone" required>
+                </div>
+                <div class="step hidden" data-step="2">
+                    <h2>Professional details</h2><input name="experience" placeholder="Experience" required><input
+                        name="skills" placeholder="Skills" required><input name="portfolio" type="url"
+                        placeholder="Portfolio URL" required><input name="linkedin" type="url"
+                        placeholder="LinkedIn URL" required>
+                </div>
+                <div class="step hidden" data-step="3">
+                    <h2>Upload documents</h2><input name="resume" type="file" accept=".pdf,.doc,.docx" required><input
+                        name="coverLetter" type="file" accept=".pdf,.doc,.docx" required>
+                </div>
+                <div class="step hidden" data-step="4">
+                    <h2>Review information</h2>
+                    <div id="application-review"></div>
+                </div><button id="next-step" type="button">Next</button><button id="submit-application" class="hidden"
+                    type="submit">Submit application</button>
+            </form>
+            <div id="application-success" class="hidden"></div>
+        </div>
+    </div>
+    <footer>
+        <p>DevJobs Portal</p>
+    </footer>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

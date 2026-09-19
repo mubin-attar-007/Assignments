@@ -1,0 +1,27 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; color: #1d2935; background: #f4f7f8; }
+header { background: #18324a; color: white; padding: 18px 6%; }
+nav { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: auto; }
+button, input, select { font: inherit; padding: 10px; border: 1px solid #cbd5dc; border-radius: 5px; }
+button { cursor: pointer; }
+main { width: min(1100px, calc(100% - 32px)); margin: 28px auto; }
+.hero { background: #d9e8ee; padding: 30px; border-radius: 8px; }
+.hero input { width: min(600px, 100%); }
+.filters { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
+.filters label { display: grid; gap: 5px; }
+#job-list { display: grid; gap: 12px; }
+.job-card { display: grid; grid-template-columns: 1fr auto; gap: 10px; background: white; border: 1px solid #d6e0e5; border-radius: 7px; padding: 18px; }
+.job-card p { margin: 6px 0; color: #526575; }
+.job-actions { display: flex; gap: 8px; align-items: center; }
+.job-actions button:last-child { background: #18324a; color: white; }
+#pagination { display: flex; gap: 6px; margin: 20px 0; }
+footer { padding: 24px 6%; text-align: center; color: #526575; }
+.company-logo { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #d9e8ee; color: #18324a; font-weight: 700; }
+.modal { position: fixed; inset: 0; display: grid; place-items: center; padding: 20px; background: rgb(0 0 0 / 45%); }
+.modal-content { width: min(560px, 100%); max-height: 90vh; overflow: auto; background: white; padding: 24px; border-radius: 8px; }
+.close { float: right; }
+.modal form { display: grid; gap: 12px; clear: both; }
+.hidden { display: none !important; }
+.skeleton { min-height: 80px; padding: 30px; color: #526575; background: linear-gradient(90deg, #edf2f4, #ffffff, #edf2f4); background-size: 200% 100%; animation: loading 1.2s infinite; }
+@keyframes loading { to { background-position: -200% 0; } }
+@media (max-width: 650px) { .job-card { grid-template-columns: 1fr; } .job-actions { justify-content: flex-start; } }
