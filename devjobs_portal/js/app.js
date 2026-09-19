@@ -10,6 +10,7 @@ const jobModal = document.querySelector('#job-modal');
 const applicationModal = document.querySelector('#application-modal');
 const details = document.querySelector('#job-details');
 const bookmarkedJobs = JSON.parse(localStorage.getItem('devJobBookmarks')) || [];
+let appliedJobs = JSON.parse(localStorage.getItem('devJobApplications')) || [];
 const jobs = Array.from({ length: 30 }, (_, index) => ({
     id: index + 1,
     title: ['Frontend Developer', 'JavaScript Developer', 'Full Stack Developer'][index % 3],
@@ -25,6 +26,7 @@ let selectedJob = null;
 let currentPage = 1;
 let applicationStep = 1;
 let showingBookmarks = false;
+let showingApplied = false;
 
 function resetApplication() {
     applicationStep = 1;
@@ -41,8 +43,9 @@ function filteredJobs() {
     const result = jobs.filter((job) => {
         const textMatch = `${job.title} ${job.company} ${job.skills}`.toLowerCase().includes(term);
         const bookmarkMatch = !showingBookmarks || bookmarkedJobs.includes(job.id);
+        const appliedMatch = !showingApplied || appliedJobs.some((application) => application.jobId === job.id);
         const salaryMatch = salaryFilter.value === 'all' || (salaryFilter.value === 'low' ? job.salary < 80000 : job.salary >= 80000);
-        return textMatch && bookmarkMatch && salaryMatch && (locationFilter.value === 'all' || job.location === locationFilter.value) && (experienceFilter.value === 'all' || job.experience === experienceFilter.value) && (typeFilter.value === 'all' || job.type === typeFilter.value) && (categoryFilter.value === 'all' || job.category === categoryFilter.value);
+        return textMatch && bookmarkMatch && appliedMatch && salaryMatch && (locationFilter.value === 'all' || job.location === locationFilter.value) && (experienceFilter.value === 'all' || job.experience === experienceFilter.value) && (typeFilter.value === 'all' || job.type === typeFilter.value) && (categoryFilter.value === 'all' || job.category === categoryFilter.value);
     });
     return result.sort((a, b) => sortJobs.value === 'high' ? b.salary - a.salary : sortJobs.value === 'low' ? a.salary - b.salary : sortJobs.value === 'az' ? a.title.localeCompare(b.title) : b.id - a.id);
 }
@@ -77,6 +80,7 @@ jobList.addEventListener('click', (event) => {
 
 document.querySelector('#pagination').addEventListener('click', (event) => { currentPage = Number(event.target.dataset.page); renderJobs(); });
 document.querySelector('#bookmarks-button').addEventListener('click', () => { showingBookmarks = !showingBookmarks; currentPage = 1; document.querySelector('#bookmarks-button').textContent = showingBookmarks ? 'All jobs' : 'Bookmarks'; renderJobs(); });
+document.querySelector('#applied-button').addEventListener('click', () => { showingApplied = !showingApplied; currentPage = 1; document.querySelector('#applied-button').textContent = showingApplied ? 'All jobs' : 'Applied jobs'; renderJobs(); });
 document.querySelectorAll('.close').forEach((button) => button.addEventListener('click', () => { jobModal.classList.add('hidden'); applicationModal.classList.add('hidden'); }));
 document.querySelector('#apply-button').addEventListener('click', () => { jobModal.classList.add('hidden'); resetApplication(); applicationModal.classList.remove('hidden'); });
 document.querySelector('#next-step').addEventListener('click', () => {
@@ -107,9 +111,8 @@ document.querySelector('#application-form').addEventListener('submit', (event) =
         alert('Please choose a PDF, DOC, or DOCX file under 5 MB.');
         return;
     }
-    const applications = JSON.parse(localStorage.getItem('devJobApplications')) || [];
-    applications.push({ jobId: selectedJob.id, submittedAt: new Date().toISOString() });
-    localStorage.setItem('devJobApplications', JSON.stringify(applications));
+    appliedJobs.push({ jobId: selectedJob.id, submittedAt: new Date().toISOString() });
+    localStorage.setItem('devJobApplications', JSON.stringify(appliedJobs));
     const applicationId = `APP-${Date.now()}`;
     const success = document.querySelector('#application-success');
     document.querySelector('#application-form').classList.add('hidden');
